@@ -22,7 +22,7 @@ cout <<"ende"<<endl;
 void ReadConfig::open() {
     reader = new ifstream(name->c_str(), std::ifstream::in);
     if(!reader->is_open()){
-        Log::message("Config parser","could not open confif File",0);
+        Log::message("Config parser","could not open config File",0);
         exit(-1);
     }
     entry * e = enceodeLine(readLine());

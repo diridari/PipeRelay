@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.6)
-project(PipeRelayV2)
+project(PipeRelay)
 
 
 
@@ -11,6 +11,6 @@ set(SOURCE_FILES  main.cpp PipeRelay/Writer/PipeWriter.cpp PipeRelay/Writer/Pipe
         PipeRelay/BaseReader.cpp PipeRelay/BaseReader.h )
 
 
-add_executable(PipeRelayV2 ${SOURCE_FILES} )
+add_executable(PipeRelay ${SOURCE_FILES} )
 
-target_link_libraries(PipeRelayV2  pthread)
+target_link_libraries(PipeRelay  pthread)
