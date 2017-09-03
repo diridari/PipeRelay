@@ -13,6 +13,10 @@ All named pipes are joined to one outgoing pipe witch can be readLine by wiresha
    
 Also is it possible to an embedded ssh connection(uses the cli ssh command of the host system), here you can 
 connect to several remote clients and transfer an remote command witch will be executed and its data send to the host-computer.
+
+
+![Alt text](structimg.png?raw=true "structure")
+
 ***
 ## How to use
 start the programm from the cli. 
@@ -46,7 +50,6 @@ you can user these parameter:
  - there are max 200 chars per line allowed   
  
 
-![Alt text](structimg.png?raw=true "Title")
 
 	
  #### Syntax:   
