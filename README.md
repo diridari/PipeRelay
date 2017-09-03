@@ -45,7 +45,9 @@ you can user these parameter:
  - an empty line ore the EOF define the end of the config file
  - there are max 200 chars per line allowed   
  
-![alt text](img.png?raw=true "structure")
+
+![Alt text](structimg.png?raw=true "Title")
+
 	
  #### Syntax:   
  * < hostname or ip> < space> < username> < space> < remote command>   
