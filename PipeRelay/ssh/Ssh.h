@@ -40,6 +40,7 @@ class ssh : public BaseReader{
 protected:
     string host = "";               // name or ip-address of the remote host
     string user = "";               // User name of the remote host
+    string setUp = "";
 
 public:
     /**
@@ -49,7 +50,7 @@ public:
      * @param remoteExecute
      * @param outPipe
      */
-    ssh(string host, string user, string remoteExecute):host(host), user(user),remoteExecute(remoteExecute){ };
+    ssh(string host, string user, string remoteExecute, string setUp = ""):host(host), user(user),remoteExecute(remoteExecute),setUp(setUp){ };
     ssh(ReadConfig::entry *inputEntry){
         user = inputEntry->user;
         host = inputEntry->client;
@@ -63,6 +64,12 @@ public:
      */
     bool open();
 
+    /**
+     * befor starting the remote command this command
+     * gets executed to setup the device
+     *
+     */
+    bool remoteSetUp(string command);
     /**
      * Loop.
      * runs until the remote host close the connection

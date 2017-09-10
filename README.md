@@ -44,23 +44,25 @@ you can user these parameter:
  - an space(' ') separate the entry-parts
  - an empty line ore the EOF define the end of the config file
  - there are max 200 chars per line allowed   
+ - you can (opt.) add with a '#' a setUp command with gets executed before stating executing remote-command 
  
  #### Syntax:   
- * < hostname or ip> < space> < username> < space> < remote command>   
+ * < hostname or ip> < space> < username> < space> < remote command with spaces>  <#> <setUp command>
  
- * < hostname or ip> < space> < username> < space> < remote command>   
+ * < hostname or ip> < space> < username> < space> < remote command with spaces>  <#> <setUp command>
  
  * ...   
     
  e.g   
  
-           127.0.0.1 linuxUser sudo tcpdump -i eth0
-           myServer  sudo tcpdump -i eth0
+           127.0.0.1 linuxUser sudo tcpdump -i eth0 #/etc/setUpScript pyh0 0 26 
+           myServer  sudo tcpdump -i eth0 # setup-Script
            
            8.8.8.8 google please hack that for me :)   
            
  * the first line says that the host ist "127.0.0.1" the user is "LinuxUser" and the command is "sudo tcpdump -i eth0"   
- * the second line says that the host ist "myServer" the user is empty(2 spaces)  and the command is "tcpdump -i eth0"    
+ * the second line says that the host ist "myServer" the user is empty(2 spaces)  and the command is "tcpdump -i eth0"  
+    also the command "setup-Script " gets executed before calling tcpdump 
  * the third line says that the end of the config is reached so that the entry in the fourth line will be ignored     
     
  

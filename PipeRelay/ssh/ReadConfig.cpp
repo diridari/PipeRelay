@@ -58,8 +58,10 @@ ReadConfig::entry* ReadConfig::enceodeLine(string *line) {
     string *client = new string("");
     string *user = new string("");
     string *exc = new string("");
+    string *setUp = new string("");
     bool isClient = true;
     bool isUser = false;
+    bool isCommand = false;
     lineIndex ++;
     char c;
     for(int index = 0; index < line->size(); index++){
@@ -74,18 +76,27 @@ ReadConfig::entry* ReadConfig::enceodeLine(string *line) {
        else if(isUser){
            if (line->at(index) != ' ' && line->at(index) != '\t')
                 *user += line->at(index);
-           else
-                isUser = false;
+           else {
+               isUser = false;
+               isCommand = true;
+             }
            }
-        else
+        else if(isCommand) {
+           if(line->at(index) != '#')
             *exc += line->at(index);
+           else
+               isCommand = false;
+
+       }else{
+            *setUp += line->at(index);
+       }
 
 
     }
 
     hasNextTmp = !(*user == "" && *client == "" && *exc == "");
     bool valid = (*user != "" && *client != "" && *exc != "");
-    ReadConfig::entry *newEntry = new entry(*client, *user, *exc,valid );
+    ReadConfig::entry *newEntry = new entry(*client, *user, *exc,valid,*setUp);
     Log::message("Config parser ",("encode line " + *user  + "  " + *client + " " + *exc),2);
 
     if(!valid && hasNextTmp)
