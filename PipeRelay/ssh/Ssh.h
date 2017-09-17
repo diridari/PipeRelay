@@ -55,6 +55,7 @@ public:
         user = inputEntry->user;
         host = inputEntry->client;
         remoteExecute = inputEntry->execute;
+        remoteSetUp(inputEntry->setUp);
     }
 
 
