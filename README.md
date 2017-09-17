@@ -1,17 +1,17 @@
 # Pipe-Relay
 
 ## Goals
-This Application has the goal to combine the data stream of of several ingoing data-streams to one outgoing data-stream. 
-To do this it's links both several ingoing named-pipes or SSH data-streams to one outgoing named pipe.
+This Application has the goal to combine the data stream of of several ingoing data-streams to one(planed : several identically) outgoing data-stream. 
+To do this, it's links both all ingoing named-pipes or SSH data-streams to one outgoing named pipe.
 This is necessary if you have
-  - several remote connections( SSH, serial ...) where the ingoing traffic shall be combined
+  - several remote connections/data-Streams ( SSH, serial, ...) where the ingoing traffic shall be combined
   - several apps whose transmitted data shall be combined to one pipe
 
-This application(is the base of Pcap-Relay ) has been written to enable sniffing with several remote Clients. 
+This application,is the base of Pcap-Relay which has been written to enable sniffing with several remote Clients. 
 Each Client sends its tcpdump via ssh to a named pipe at the host system.
-All named pipes are joined to one outgoing pipe witch can be readLine by wireshark   
+All named pipes are joined to one outgoing pipe witch can be read by Wireshark or Foren6
    
-Also is it possible to an embedded ssh connection(uses the cli ssh command of the host system), here you can 
+Also is it possible to an embedded ssh connection(uses the cli ssh commands of the host system), here you can 
 connect to several remote clients and transfer an remote command witch will be executed and its data send to the host-computer.
 ***
 ## How to use
