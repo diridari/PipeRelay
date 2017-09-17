@@ -42,7 +42,8 @@ string sshlocation = "/tmp/pipeRelay";
 }
 */
 bool ssh::open() {
-
+    if(setUp != "")
+        remoteSetUp(setUp);
     string s = "ssh -q " + user +"@"+host + " '"+remoteExecute+"'" ; // -t
     Log::message(("ssh to " + host),("call: " + s) ,1);
     if(!(pipe = popen((s.c_str()), "r"))){
@@ -62,4 +63,16 @@ void ssh::read(char *buffer, int size){
 
     fread(buffer,size,1,pipe);
 
+}
+
+bool ssh::remoteSetUp(string command){
+    string s = "ssh -q " + user +"@"+host + " '"+command+"'" ; // -t
+    Log::message(("ssh setup  to " + host),("call: " + s) ,1);
+    FILE *device;
+    if(!(device = popen((s.c_str()), "r"))){
+        cerr << "cout not open device:: "<< s<<endl;
+        return false;
+    }
+    //TODO setup + success challenge
+    return true;
 }

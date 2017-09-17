@@ -1,17 +1,17 @@
 # Pipe-Relay
 
 ## Goals
-This Application has the goal to combine the data stream of of several ingoing data-streams to one outgoing data-stream. 
-To do this it's links both several ingoing named-pipes or SSH data-streams to one outgoing named pipe.
+This Application has the goal to combine the data stream of of several ingoing data-streams to one(planed : several identically) outgoing data-stream. 
+To do this, it's links both all ingoing named-pipes or SSH data-streams to one outgoing named pipe.
 This is necessary if you have
-  - several remote connections( SSH, serial ...) where the ingoing traffic shall be combined
+  - several remote connections/data-Streams ( SSH, serial, ...) where the ingoing traffic shall be combined
   - several apps whose transmitted data shall be combined to one pipe
 
-This application(is the base of Pcap-Relay ) has been written to enable sniffing with several remote Clients. 
+This application,is the base of Pcap-Relay which has been written to enable sniffing with several remote Clients. 
 Each Client sends its tcpdump via ssh to a named pipe at the host system.
-All named pipes are joined to one outgoing pipe witch can be readLine by wireshark   
+All named pipes are joined to one outgoing pipe witch can be read by Wireshark or Foren6
    
-Also is it possible to an embedded ssh connection(uses the cli ssh command of the host system), here you can 
+Also is it possible to an embedded ssh connection(uses the cli ssh commands of the host system), here you can 
 connect to several remote clients and transfer an remote command witch will be executed and its data send to the host-computer.
 
 
@@ -48,26 +48,28 @@ you can user these parameter:
  - an space(' ') separate the entry-parts
  - an empty line ore the EOF define the end of the config file
  - there are max 200 chars per line allowed   
+ - you can (opt.) add with a '#' a setUp command with gets executed before stating executing remote-command 
  
 
 
 	
  #### Syntax:   
- * < hostname or ip> < space> < username> < space> < remote command>   
+ * < hostname or ip> < space> < username> < space> < remote command with spaces>  <#> <setUp command>
  
- * < hostname or ip> < space> < username> < space> < remote command>   
+ * < hostname or ip> < space> < username> < space> < remote command with spaces>  <#> <setUp command>
  
  * ...   
     
  e.g   
  
-           127.0.0.1 linuxUser sudo tcpdump -i eth0
-           myServer  sudo tcpdump -i eth0
+           127.0.0.1 linuxUser sudo tcpdump -i eth0 #/etc/setUpScript pyh0 0 26 
+           myServer  sudo tcpdump -i eth0 # setup-Script
            
            8.8.8.8 google please hack that for me :)   
            
  * the first line says that the host ist "127.0.0.1" the user is "LinuxUser" and the command is "sudo tcpdump -i eth0"   
- * the second line says that the host ist "myServer" the user is empty(2 spaces)  and the command is "tcpdump -i eth0"    
+ * the second line says that the host ist "myServer" the user is empty(2 spaces)  and the command is "tcpdump -i eth0"  
+    also the command "setup-Script " gets executed before calling tcpdump 
  * the third line says that the end of the config is reached so that the entry in the fourth line will be ignored     
     
  

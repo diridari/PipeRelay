@@ -30,6 +30,7 @@ public:
         string client = ""; // remote host or ip address
         string user = "";   // user name
         string execute = "";// renote command
+        string setUp = "";
         bool valid;         // is the enty valid that means that all string != ""
 
         /**
@@ -39,7 +40,7 @@ public:
          * @param execute command
          * @param valid   is vlaid
          */
-        entry(string client, string user, string execute, bool valid):client(client), execute(execute), user(user), valid(valid){};
+        entry(string client, string user, string execute, bool valid, string setUp =""):client(client), execute(execute), user(user), valid(valid),setUp(setUp){};
     };
 private:
     entry * next;           // next valid entry
