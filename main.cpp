@@ -6,7 +6,7 @@
 
 #include <search.h>
 #include "main.h"
-#include "PipeRelay/Reader/PipeReader.h"
+#include "PipeReader.h"
 
 
 using namespace std;

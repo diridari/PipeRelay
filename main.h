@@ -9,8 +9,8 @@
 #include <string.h>
 #include <thread>
 #include <vector>
-#include "PipeRelay/Writer/PipeWriter.h"
-#include "PipeRelay/ssh/Ssh.h"
+#include "PipeWriter.h"
+#include "Ssh.h"
 
 
 using namespace std;

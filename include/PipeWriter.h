@@ -8,10 +8,10 @@
 
 
 
-#include "../PipeHandler.h"
+#include "PipeHandler.h"
 #include <mutex>
 #include <fstream>
-#include "../BaseReader.h"
+#include "BaseReader.h"
 
 
 #include <sys/stat.h>

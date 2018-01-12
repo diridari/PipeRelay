@@ -7,7 +7,7 @@
 
 #include <string>
 #include <iostream>
-#include "../../Loging/Log.h"
+#include "Log.h"
 
 using namespace std;
 

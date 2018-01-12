@@ -9,10 +9,10 @@
 #include <iostream>
 #include <stdio.h>
 #include "ReadConfig.h"
-#include "../Writer/PipeWriter.h"
-#include "../BaseReader.h"
+#include "PipeWriter.h"
+#include "BaseReader.h"
 
-#include "../../Loging/Log.h"
+#include "Log.h"
 using namespace std;
 
 class entry;

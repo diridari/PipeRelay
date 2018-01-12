@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include <fstream>
-#include "../Writer/PipeWriter.h"
+#include "PipeWriter.h"
 #include <thread>
 
 #include <mutex>

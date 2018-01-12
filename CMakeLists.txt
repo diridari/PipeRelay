@@ -5,10 +5,12 @@ project(PipeRelay)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES  main.cpp PipeRelay/Writer/PipeWriter.cpp PipeRelay/Writer/PipeWriter.h PipeRelay/Reader/PipeReader.cpp
-        PipeRelay/Reader/PipeReader.h Loging/Log.h Loging/Log.cpp PipeRelay/PipeHandler.h PipeRelay/Pipehandler.cpp
-        PipeRelay/ssh/ReadConfig.h PipeRelay/ssh/Ssh.cpp PipeRelay/ssh/Ssh.h PipeRelay/ssh/ReadConfig.cpp
-        PipeRelay/BaseReader.cpp PipeRelay/BaseReader.h )
+include_directories(include)
+
+set(SOURCE_FILES  main.cpp src/Writer/PipeWriter.cpp include/PipeWriter.h src/Reader/PipeReader.cpp
+        include/PipeReader.h include/Log.h src/Loging/Log.cpp include/PipeHandler.h src/Pipehandler.cpp
+        include/ReadConfig.h src/ssh/Ssh.cpp include/Ssh.h src/ssh/ReadConfig.cpp
+        src/BaseReader.cpp include/BaseReader.h)
 
 
 add_executable(PipeRelay ${SOURCE_FILES} )
