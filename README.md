@@ -1,4 +1,4 @@
-# Pipe-Relay
+# Pipe Stream Merge
 
 ## Goals
 This Application has the goal to combine the data stream of of several ingoing data-streams to one(planed : several identically) outgoing data-stream. 
