@@ -1,0 +1,2 @@
+/usr/bin/ar qc libPipeRelayLib.a  CMakeFiles/PipeRelayLib.dir/src/Writer/PipeWriter.cpp.o CMakeFiles/PipeRelayLib.dir/src/Reader/PipeReader.cpp.o CMakeFiles/PipeRelayLib.dir/src/Loging/Log.cpp.o CMakeFiles/PipeRelayLib.dir/src/Pipehandler.cpp.o CMakeFiles/PipeRelayLib.dir/src/ssh/Ssh.cpp.o CMakeFiles/PipeRelayLib.dir/src/ssh/ReadConfig.cpp.o CMakeFiles/PipeRelayLib.dir/src/BaseReader.cpp.o
+/usr/bin/ranlib libPipeRelayLib.a

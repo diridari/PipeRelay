@@ -1,0 +1,4 @@
+/home/basto/Git/PipeRelay/CMakeFiles/edit_cache.dir
+/home/basto/Git/PipeRelay/CMakeFiles/rebuild_cache.dir
+/home/basto/Git/PipeRelay/CMakeFiles/PipeRelayLib.dir
+/home/basto/Git/PipeRelay/CMakeFiles/PipeRelay.dir
