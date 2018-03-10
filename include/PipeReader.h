@@ -9,7 +9,6 @@
 #include <fstream>
 #include "PipeWriter.h"
 #include <thread>
-
 #include <mutex>
 
 using namespace std;

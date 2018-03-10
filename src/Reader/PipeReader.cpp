@@ -5,13 +5,15 @@
 #include "PipeReader.h"
 
 #include <cstring>
+#include <logging.h>
+
 bool PipeReader::open(){
 
     char *tmp = createPipe();
-    Log::message(name, "please open in pipe e.g  [ \033[1;35m sudo tcpdump -U -s0 -w- > " + location   +" \033[0m]    or"
-            "  [ \033[1;35m ssh <username>@<ip> 'sudo tcpdump -U -s0 -i wpan0 -w-' > " + location + " \033[0m]",0);
+    Log::log(name+ "please open in pipe e.g  [ \033[1;35m sudo tcpdump -U -s0 -w- > " + location   +" \033[0m]    or"
+            "  [ \033[1;35m ssh <username>@<ip> 'sudo tcpdump -U -s0 -i wpan0 -w-' > " + location + " \033[0m]",UserInfo);
     inReader = new ifstream(tmp);
-    Log::message(name,"Pipe : "+location +"is now open",1);
+    Log::log(name+"Pipe : "+location +"is now open",Message);
     isOpen = true;
     return inReader->is_open();
 }
@@ -27,13 +29,13 @@ void PipeReader::close(){
 
 void PipeReader::read(char * buffer, int size){
     if(!isOpen) {
-       Log::message(name,"pipe is not open",0);
+       Log::log(name+"pipe is not open",CriticError);
         return;
     }
 
 
         inReader->read(buffer,size);
     if(!inReader)
-        Log::message(name,"error with while reading the pipe ",0);
+        Log::log(name+"error with while reading the pipe ",CriticError);
 
 }

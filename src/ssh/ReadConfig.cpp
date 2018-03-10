@@ -4,6 +4,7 @@
 
 #include "ReadConfig.h"
 #include <fstream>
+#include <logging.h>
 
 
 void exampleConfig () {
@@ -22,11 +23,11 @@ cout <<"ende"<<endl;
 void ReadConfig::open() {
     reader = new ifstream(name->c_str(), std::ifstream::in);
     if(!reader->is_open()){
-        Log::message("Config parser","could not open config File",0);
+        Log::log("Config parser ; could not open config File",CriticError);
         exit(-1);
     }
     entry * e = enceodeLine(readLine());
-    Log::message("Config parser","open config parser",3);
+    Log::log("Config parser : open config parser",Info);
 
     while(hasNextTmp && !e->valid){
         e = enceodeLine(readLine());
@@ -54,7 +55,7 @@ string * ReadConfig::readLine() {
 }
 
 ReadConfig::entry* ReadConfig::enceodeLine(string *line) {
-    Log::message("Config parser","encode line " + *line,3);
+    Log::log("Config parser : encode line " + *line,Info);
     string *client = new string("");
     string *user = new string("");
     string *exc = new string("");
@@ -97,7 +98,7 @@ ReadConfig::entry* ReadConfig::enceodeLine(string *line) {
     hasNextTmp = !(*user == "" && *client == "" && *exc == "");
     bool valid = (*user != "" && *client != "" && *exc != "");
     ReadConfig::entry *newEntry = new entry(*client, *user, *exc,valid,*setUp);
-    Log::message("Config parser ",("encode line " + *user  + "  " + *client + " " + *exc),2);
+    Log::log("Config parser  : encode line " + *user  + "  " + *client + " " + *exc,Info);
 
     if(!valid && hasNextTmp)
         cerr << "unvalid entry in line "<<lineIndex<<" : "<<*line<<endl;
@@ -111,7 +112,7 @@ ReadConfig::entry* ReadConfig::getNextValid() {
     entry *tmp = next;
     entry * e = enceodeLine(readLine());
     while(hasNextTmp && !e->valid) {
-       Log::message("Config Parser"," read next",3);
+       Log::log("Config Parser :  read next",Info);
         string *line = readLine();
         e = enceodeLine(line);
     }

@@ -11,7 +11,7 @@
 #include <sys/stat.h>
 #include <string>
 #include <cstring>
-#include "Log.h"
+
 using namespace std;
 class PipeHandler{
 

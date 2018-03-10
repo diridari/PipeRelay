@@ -1,6 +1,7 @@
 //
 // Created by basti on 1/29/17.
 //
+#include <logging.h>
 #include "PipeHandler.h"
 
 
@@ -10,12 +11,12 @@ char* PipeHandler::createPipe(){
     strcpy(tmp,location.c_str());
 
     if(!remove(tmp))
-        Log::message(name,"delete old Pipe",3);
+        Log::log(name+"delete old Pipe",Info);
     if(mkfifo(tmp,0666) != 0){
         cerr<< name <<"  init: Could not open the pipe located at: " <<location<<endl;
     }
     else{
-        Log::message(name,"create Pipe",3);
+        Log::log(name+"create Pipe",Info);
     }
     return tmp;
 }

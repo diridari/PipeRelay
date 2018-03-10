@@ -12,7 +12,6 @@
 #include "PipeWriter.h"
 #include "BaseReader.h"
 
-#include "Log.h"
 using namespace std;
 
 class entry;

@@ -12,8 +12,6 @@
 #include <mutex>
 #include <fstream>
 #include "BaseReader.h"
-
-
 #include <sys/stat.h>
 
 using namespace std;
