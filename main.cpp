@@ -7,6 +7,8 @@
 #include <search.h>
 #include "main.h"
 #include "PipeReader.h"
+#include <unistd.h>
+#include <logging.h>
 
 
 using namespace std;
@@ -38,8 +40,6 @@ using namespace std;
  * - encap
  * - remoteSetup
  */
-#include <unistd.h>
-#include <logging.h>
 
 
 int main(int argc, char *argv[]) {

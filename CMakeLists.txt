@@ -25,19 +25,22 @@ externalProject_add(
 ExternalProject_Get_Property(simpleLogging SOURCE_DIR)
 ExternalProject_Get_Property(simpleLogging BINARY_DIR)
 include_directories(${SOURCE_DIR}/include) # include simpleLog/inlude
-
 LINK_DIRECTORIES(${BINARY_DIR}) ## link git build lib
 
 
 
+
+
+
+
 ## Cmake for building a Executable
-add_executable(PipeRelay ${SOURCE_FILES_Exec} )
+add_executable(PipeRelay ${SOURCE_FILES_Exec} ${SOURCE_DIR})
 ADD_DEPENDENCIES(PipeRelay simpleLogging)
 target_link_libraries(PipeRelay  pthread SimpleLoggingLib)
 
 
 ## Cmake to build a library
-ADD_LIBRARY( PipeRelayLib STATIC ${PipeMerge_Files})
+ADD_LIBRARY( PipeRelayLib STATIC ${PipeMerge_Files} ${SOURCE_DIR})
 ADD_DEPENDENCIES(PipeRelayLib simpleLogging)
 target_link_libraries(PipeRelayLib  pthread SimpleLoggingLib)
 
