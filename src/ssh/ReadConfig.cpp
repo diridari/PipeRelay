@@ -101,7 +101,7 @@ ReadConfig::entry* ReadConfig::enceodeLine(string *line) {
     Log::log("Config parser  : encode line " + *user  + "  " + *client + " " + *exc,Info);
 
     if(!valid && hasNextTmp)
-        cerr << "unvalid entry in line "<<lineIndex<<" : "<<*line<<endl;
+        Log::log("unvalid entry in line " + to_string(lineIndex)+" : "+ *line,CriticError);
     return newEntry;
 }
 

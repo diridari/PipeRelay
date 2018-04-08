@@ -48,7 +48,7 @@ bool ssh::open() {
     string s = "ssh -q " + user +"@"+host + " '"+remoteExecute+"'" ; // -t
     Log::log(("ssh to " + host) + ("call: " + s) ,Message);
     if(!(pipe = popen((s.c_str()), "r"))){
-        cerr << "cout not open pipe:: "<< s<<endl;
+        Log::log("cout not open pipe:: "+ s,CriticError);
         return false;
     }
     isOpen = true;
@@ -61,7 +61,6 @@ void ssh::read(char *buffer, int size){
         Log::log("ssh reader : is not open",Message);
         return;
     }
-
     fread(buffer,size,1,pipe);
 
 }
@@ -71,7 +70,7 @@ bool ssh::remoteSetUp(string command){
     Log::log(("ssh setup  to " + host)+ ("call: " + s) ,Message);
     FILE *device;
     if(!(device = popen((s.c_str()), "r"))){
-        cerr << "cout not open device:: "<< s<<endl;
+        Log::log("cout not open device:: "+s,CriticError);
         return false;
     }
     //TODO setup + success challenge
