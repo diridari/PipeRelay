@@ -1,3 +1,0 @@
-repository='https://github.com/diridari/SimpleLogging.git'
-module=''
-tag=''
