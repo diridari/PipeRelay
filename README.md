@@ -1,18 +1,18 @@
 # Pipe Stream Merge
 
 ## Goals
-This Application has the goal to combine the data stream of of several ingoing data-streams to one(planed : several identically) outgoing data-stream. 
-To do this, it's links both all ingoing named-pipes or SSH data-streams to one outgoing named pipe.
+This Application has the goal to combine the data stream of of several ingoing data-streams to one (planed : several identically) outgoing data-stream. 
+In order to do this, it links all ingoing named-pipes or SSH data-streams to one outgoing named pipe.
 This is necessary if you have
-  - several remote connections/data-Streams ( SSH, serial, ...) where the ingoing traffic shall be combined
-  - several apps whose transmitted data shall be combined to one pipe
+  - several remote connections/data-Streams ( SSH, serial, ...) where the ingoing traffic should be combined
+  - several apps whose transmitted data should be combined to one pipe
 
-This application,is the base of Pcap-Relay which has been written to enable sniffing with several remote Clients. 
+This application is the bases off Pcap-Relay which has been written to enable sniffing with several remote Clients. 
 Each Client sends its tcpdump via ssh to a named pipe at the host system.
-All named pipes are joined to one outgoing pipe witch can be read by Wireshark or Foren6
+All named pipes are joined to one outgoing pipe witch can be read by Wireshark or Foren6 (XXXX generell: Wann ein Punkt am Ende, wann nicht?)
    
-Also is it possible to an embedded ssh connection(uses the cli ssh commands of the host system), here you can 
-connect to several remote clients and transfer an remote command witch will be executed and its data send to the host-computer.
+It also is possible to use an embedded ssh connection (uses the cli ssh commands of the host system). Here you can 
+connect to several remote clients and transfer a remote command. After executed its data/content will be send to the host computer. 
 
 
 ![Alt text](structimg.png?raw=true "structure")
@@ -25,25 +25,25 @@ you can user these parameter:
                -ssh     <configFile>
                -pipe    <numberOf>
                -l       <outPutLocation>        	default : /tmp/pipeRelay 
-               -log     <loglevel>                  how verbose this application is default:0 max:4   
+               -log     <loglevel>                  Degree of detailedness of the application`s report default:0 max:4 
                <no paramether>                  	2 named pipes
 
 
             
    < configFile > is the name and/or the location of the file witch describe the ssh connection.  
     
-   < number of > is the number of named pipe witch the programm open.     
+   < number of > is the number of named pipes which the programm should open.     
    The named pipes are stored at "/tmp/pipeRelay< number >"
    if there is no parameter the application create per default 3 named-pipes.    
    
-   "encap"sulation: linux encasulat network packages from a unknown source. Foren6 is not able to handle sutch Packages
-   the solution in this case is to remove this encapsulation Header and change the pcap-linkylaer to a 6lowpan one.
+   "encap"sulation: linux encapsulates network packages from an unknown source. Foren6 is not able to handle such Packages
+   the solution in this case is to remove this encapsulation header and change the pcap-linklayer to a 6lowpan one.
    By default this feature is enabled.
    
- ### Config-File
- If the application shall run in ssh mod the user has to define an config file where the app can read witch clients to connect,
- and witch applications shall run at the remote client.   
- The config file has following definitions:   
+ ### Config-File  (XXXX Ab hier exakt gleich zu Readme.txt? Falls ja, kopiere Rest von dort hierher, um die dortigen Änderungen mitzunehmen).
+ If the application runs in ssh mode, the user has to define a config file. Using this file the app can read which clients to 
+ connect to and which applications are supposed to run at the remote client. 
+ <The config file has following definitions:   
  - each entry stands in its own line
  - an space(' ') separate the entry-parts
  - an empty line ore the EOF define the end of the config file
@@ -73,7 +73,7 @@ you can user these parameter:
  * the third line says that the end of the config is reached so that the entry in the fourth line will be ignored     
     
  
-## How to user(dev) 
+## How to dev 
 
 -   Each Pipe Reader shall run in a single Thread. 
 -   All pipe-reader obj shall have the same outgoing pipe obj
@@ -81,37 +81,36 @@ you can user these parameter:
 ## Function   
 
 ### main
-The main function can be called with non or with 2 parameter.   
-If there is no parameter the program will create by default 3 named pipes at "/tmp/pipeRelay< 0-2>   
+The main function can be called either with no or with two parameters.   
+If there is no parameter the program will by default create 3 named pipes at "/tmp/pipeRelay< 0-2>   
 by using the parameter ["pipe"],[< number >]  the program will create < number> pipes at "/tmp/pipeRelay[0-(number-1)]   
-If the parameter is ["ssh"],["name"] the program use an ssh connection to the clients name is the name of the config file
-  witch describe to witch clients the host shall connect.   
+If the parameter is ["ssh"],["name"] the program will use a ssh connection to the clients name. For this purpose the name of the config file
+  describes the name of the client the host is supposed to connect to.   
    
 ### Reader
 Pipereader is the reading part of this application. 
-Each reader shall run in an singe thread 
+Each reader shall run in an single thread 
 -Constructor
      
         reader(location, writer, name, message, log)
             string *location    : location of the named pipe               default : "/tmp/pipeRelayOut"
             writer *writer      : outgoing obj (each obj shall have the same)
             string *name        : identifier in log and messages           default : "unnamed reader"
-         
-                                  
-   
+                                         
         
 - open()   
     After creating the reader obj the main application has to run the open() method 
-    This method create an named pipe at <location> (and delete the an old file if there is one)
-    open() blocks until an write app opens the other end of the named pipe
+    This method creates a named pipe at <location> (and deletes the old file if existent)
+    open() blocks until a write app opens the other end of the named pipe
     
 - read(char * buff, int size)   
-   reads < size > bytes from the ingoing pipe and write them to the given buffer
+   reads < size > bytes from the ingoing pipe and writes them to the given buffer
  
 ### Writer
 Pipewriter is the writing part of this application.
-There is one writer. 
-Each reader thread sends its pcap data to this writer. The methods writer (pcap) and write (byte[], size) are protected by an mutex witch prevent simultaneous writing by differned threads 
+There is only one writer. 
+Each reader thread sends its pcap data to this writer. The methods writer (pcap) and write (byte[], size) are 
+protected by an mutex, which prevents simultaneous writing by differned threads 
 -   Constructor
 
         writer(location, name , message, log)
@@ -119,11 +118,11 @@ Each reader thread sends its pcap data to this writer. The methods writer (pcap)
             string *name        : identifier in log and messages            default : "unnamed writer"
         
 -   open()   
-        After creation the writer obj the applications has to open the writer
-        this method creat an named pipe at <location> (and delete an old on if ther is on)
-        open() blocks until the reading end of the named-pipe gets opend
+        After creating the writer obj the application has to open the writer
+        this method creates a named pipe at <location> (and deletes the old on if existent)
+        open() blocks until the reading end of the named pipe gets opend
 -   write(char * byte , size)   
-        Write an byte array to the pipe
+        Write a byte array to the pipe
         this method uses mutex to avoid simultaneous writings
         
   
@@ -131,16 +130,16 @@ Each reader thread sends its pcap data to this writer. The methods writer (pcap)
  
 ### SSH
 This application supports an embedded ssh connection to the remote host (using the default ssh program on your client pc).   
-To do this is is necessary that it is possible to login passwordless at the remote client by using e.g an keyfile.   
-The user has to tell the application by an config file witch clients to connect.  
-Some Application at the remote client musts run as root.
-To avoid password leaks in config files i recommend to add the application to the "visudo" list to enable that this application 
+For this purpose it is necessary to be able to login passwordless at the remote client by using e.g a keyfile.   
+The user has to tell the application  which clients to connect to by an config file.  
+Some applications at the remote client must run as root.
+To avoid password leaks in config files it is recommended to add the application to the "visudo" list. This enables that the application 
 does not request an sudo password.   
-Alternative you can use an keypass program(in the config file).   
+Alternatively, you can use an keypass program (in the config file).   
    
-The embedded ssh connection has at it beginning a lot of overhead so the run method checks at first if the 
-pcap Signature and read as long as there has not been the signature.   
-The main usage will be tcpdump, so run() will check if the next is the tcpdump signature and cut it out.
+The embedded ssh connection has lots of overhead at the beginning. Therefor the run method first checks the 
+pcap signature and then reads as long as there is no signature.   
+The main usage will be tcpdump. run() will checks for the tcpdump signature and cuts it out.
     
     ssh(host, user, remoteExecute, *outPipe)
     or
@@ -148,18 +147,17 @@ The main usage will be tcpdump, so run() will check if the next is the tcpdump s
     
         string host                    :     IP-Address or the host name 
         string user                    :     user name on the remote machine
-        string remoteExecute:          :     commend that will be executed on the remote machine
-        ReadConfig::entry *inputEntry  :     strct created by the config reader
+        string remoteExecute:          :     command that will be executed on the remote machine (XXXXX command or comment?)
+        ReadConfig::entry *inputEntry  :     struct created by the config reader
         writer *outPipe                :     outgoing pipeWriter. The ssh obj send its pcap to this class
 
 * bool open()   
 opens the ssh conection    
   
 * void run()    
-Stats the ssh loop. At first it cut out all ssh related overhead. After that it sends the pcap-file-header to to outgoing pipe 
-and stats reading pcaps
+Starts the ssh loop. At first it cuts out all ssh related overhead. Thereafter it sends the pcap-file-header to the outgoing pipe 
+and starts reading pcaps
 
 * read(char * buff, int size)   
-   reads < size > bytes from the ingoing pipe and write them to the given buffer
+   reads < size > bytes from the ingoing pipe and writes them to the given buffer
  
-
