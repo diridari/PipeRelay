@@ -40,39 +40,34 @@ you can user these parameter:
    the solution in this case is to remove this encapsulation header and change the pcap-linklayer to a 6lowpan one.
    By default this feature is enabled.
    
- ### Config-File  (XXXX Ab hier exakt gleich zu Readme.txt? Falls ja, kopiere Rest von dort hierher, um die dortigen Änderungen mitzunehmen).
- If the application runs in ssh mode, the user has to define a config file. Using this file the app can read which clients to 
- connect to and which applications are supposed to run at the remote client. 
- <The config file has following definitions:   
- - each entry stands in its own line
- - an space(' ') separate the entry-parts
- - an empty line ore the EOF define the end of the config file
- - there are max 200 chars per line allowed   
- - you can (opt.) add with a '#' a setUp command with gets executed before stating executing remote-command 
- 
+ ### Config-File
+If the application runs in ssh mode, the user has to define a config file. Using this file the app can read which clients to 
+connect to and which applications are supposed to run at the remote client.   
+The config file has following definitions:   
+- each entry stands in a separate line
+- a space (' ') separates the entry-parts
+- an empty line or the EOF descriptor define the end of the config file 
+- there are max 200 chars allowed per line   
 
+#### Syntax:   
+* < hostname or ip> < space> < username> < space> < remote command>    <line end>
 
-	
- #### Syntax:   
- * < hostname or ip> < space> < username> < space> < remote command with spaces>  <#> <setUp command>
- 
- * < hostname or ip> < space> < username> < space> < remote command with spaces>  <#> <setUp command>
- 
- * ...   
-    
- e.g   
- 
-           127.0.0.1 linuxUser sudo tcpdump -i eth0 #/etc/setUpScript pyh0 0 26 
-           myServer  sudo tcpdump -i eth0 # setup-Script
-           
-           8.8.8.8 google please hack that for me :)   
-           
- * the first line says that the host ist "127.0.0.1" the user is "LinuxUser" and the command is "sudo tcpdump -i eth0"   
- * the second line says that the host ist "myServer" the user is empty(2 spaces)  and the command is "tcpdump -i eth0"  
-    also the command "setup-Script " gets executed before calling tcpdump 
- * the third line says that the end of the config is reached so that the entry in the fourth line will be ignored     
-    
- 
+* < hostname or ip> < space> < username> < space> < remote command>   <line end>
+
+* ...   
+   
+e.g   
+
+          127.0.0.1 linuxUser sudo tcpdump -i eth0
+          myServer  sudo tcpdump -i eth0  // invalid          
+          8.8.8.8 google please hack that for me :)   
+          
+* the first line says that the host ist "127.0.0.1" the user is "LinuxUser" and the command is "sudo tcpdump -i eth0"   
+* the second line says that the host ist "myServer" the user is empty(2 spaces)   and the command is "tcpdump -i eth0"    
+* the third line says that the end of the config is reached so that the entry in the fourth line will be ignored     
+   
+***
+***
 ## How to dev 
 
 -   Each Pipe Reader shall run in a single Thread. 
@@ -147,7 +142,7 @@ The main usage will be tcpdump. run() will checks for the tcpdump signature and 
     
         string host                    :     IP-Address or the host name 
         string user                    :     user name on the remote machine
-        string remoteExecute:          :     command that will be executed on the remote machine (XXXXX command or comment?)
+        string remoteExecute:          :     command that will be executed on the remote machine 
         ReadConfig::entry *inputEntry  :     struct created by the config reader
         writer *outPipe                :     outgoing pipeWriter. The ssh obj send its pcap to this class
 
